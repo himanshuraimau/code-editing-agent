@@ -7,7 +7,12 @@ A conversational CLI agent powered by OpenAI, capable of reading, listing, and e
 - **Read files:** View the contents of any file in your workspace.
 - **List files:** Explore directories and see available files/folders.
 - **Edit files:** Replace text or create new files programmatically.
-- **OpenAI-powered:** Uses GPT-3.5-turbo with function calling for intelligent code and file operations.
+- **OpenAI-powered:** Uses GPT-3.5-turbo with function calling for intelligent code and 
+file operations.
+
+## Architecture
+![Architecture Diagram](image.png)
+
 
 ## Project Structure
 
