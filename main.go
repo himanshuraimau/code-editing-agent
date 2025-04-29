@@ -122,7 +122,8 @@ func (a *Agent) Run(ctx context.Context) error {
 				}
 				conversation = append(conversation, toolMessage)
 
-					// Mark the entire tool execution as failed if any tool fails
+				// Mark the entire tool execution as failed if any tool fails
+				if strings.Contains(result, "error") || strings.Contains(result, "failed") {
 					allToolsSuccessful = false
 				}
 			}
