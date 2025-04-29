@@ -1,95 +1,60 @@
 # Code Editing Agent
 
-An AI-powered chat agent that can read, list, and edit files in your local workspace. This tool creates a conversational interface to your codebase, allowing you to interact with your files through natural language commands.
+A conversational CLI agent powered by OpenAI, capable of reading, listing, and editing files in your workspace using natural language and function calling.
 
 ## Features
 
-- Interactive chat interface with an OpenAI-powered assistant
-- File operations through natural language:
-  - Read file contents
-  - List files in directories
-  - Edit files with text replacement
-  - Create new files
-- Context-aware conversations that maintain history
-- Clean, color-coded terminal output
+- **Read files:** View the contents of any file in your workspace.
+- **List files:** Explore directories and see available files/folders.
+- **Edit files:** Replace text or create new files programmatically.
+- **OpenAI-powered:** Uses GPT-3.5-turbo with function calling for intelligent code and file operations.
 
-## Requirements
+## Project Structure
 
-- Go 1.18+ (for generics support)
-- OpenAI API key
-- The following Go packages:
-  - github.com/invopop/jsonschema
-  - github.com/joho/godotenv
-  - github.com/sashabaranov/go-openai
+```
+.
+├── main.go                      # Entry point, CLI wiring
+├── go.mod                       # Go module definition
+├── internal/
+│   ├── agent/
+│   │   └── agent.go             # Agent logic (conversation, tool execution)
+│   └── tools/
+│       └── tools.go             # Tool definitions (read, list, edit files)
+└── README.md                    # Project documentation
+```
 
-## Installation
+## Setup
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/himanshuraimau/code-editing-agent.git
+1. **Clone the repository:**
+   ```sh
+   git clone <your-repo-url>
    cd code-editing-agent
    ```
 
-2. Install the required dependencies:
-   ```bash
+2. **Install dependencies:**
+   ```sh
    go mod tidy
    ```
 
-3. Create a `.env` file in the project root with your OpenAI API key:
-   ```
-   OPENAI_API_KEY=your_api_key_here
+3. **Set up your OpenAI API key:**
+   - Create a `.env` file in the project root:
+     ```
+     OPENAI_API_KEY=your_openai_api_key_here
+     ```
+
+4. **Run the agent:**
+   ```sh
+   go run main.go
    ```
 
 ## Usage
 
-Run the application:
+- Type your requests in the terminal (e.g., "Show me the contents of main.go" or "Replace foo with bar in internal/tools/tools.go").
+- Use `Ctrl+C` to exit.
 
-```bash
-go run main.go
-```
+## Extending
 
-Once started, you'll see a chat interface where you can interact with the AI assistant. The agent supports the following operations:
+- Add new tools in `internal/tools/tools.go`.
+- Register them in `main.go` by adding to the `toolsList`.
 
-### Reading Files
 
-Ask to view the contents of a file:
-```
-You: Show me the contents of main.go
-```
-
-### Listing Files
-
-Ask to see all files in a directory:
-```
-You: What files are in the current directory?
-```
-
-### Editing Files
-
-Request changes to a file:
-```
-You: Replace "Hello World" with "Hello, AI!" in the file greeting.txt
-```
-
-### Creating Files
-
-Create new files with content:
-```
-You: Create a new file called example.json with an empty JSON object
-```
-
-## How It Works
-
-The agent uses OpenAI's function calling API to translate natural language requests into file operations. It provides the AI model with tools for reading, listing, and editing files, which the model can use to respond to your queries.
-
-When you ask a question or make a request, the agent:
-
-1. Sends your input to the OpenAI API
-2. Interprets any tool calls requested by the model
-3. Executes file operations locally
-4. Returns the results back to the model
-5. Provides you with the final response
-
-## License
-
-[MIT License](LICENSE)
